@@ -79,6 +79,17 @@ void PSF::setParams(psf_params new_params){
 }
 
 
+cv::Mat PSF::getFlatWF(){
+    
+    vector<double> size_vec{this->nx, this->nx};
+    vector<double> origin{-1, -1};
+
+    this->bpp = discArray(size_vec, this->radius, origin);
+
+    return this->bpp;
+}
+
+
 
 
 RECON_2D::RECON_2D(vector<cv::Mat> input_img_stack, int input_nangles, int input_nphs, double input_wavelength, double input_na, double input_dx, double input_mu, double input_cut_off) {
@@ -95,9 +106,6 @@ RECON_2D::RECON_2D(vector<cv::Mat> input_img_stack, int input_nangles, int input
     img = subback(input_img_stack);
     // do not need to do self.img = self.img.reshape(self.nang,self.nph,nx,ny), the result is already reshaped from suback
     psf = getpsf();
-
-
-
 }
 
 
@@ -109,22 +117,67 @@ cv::Mat RECON_2D::getpsf(){
     psf_params new_psf_params;
     new_psf_params.wl = this->wl;
     new_psf_params.na = this->na;
-    new_psf_params.dx = this->dx;
-    new_psf_params.nx = this->nx;
+    new_psf_params.dx = dx;
+    new_psf_params.nx = nx;
 
     psf.setParams(new_psf_params);
     this->radius = psf.radius;
 
-    // cout<<psf.dx << endl;
-    vector<double> vect{ 128,128 };
-    // psf.bpp = discArray(vect, 1);
-    cout << vect[0] << endl;
+    psf.bpp = psf.getFlatWF();
+
+
+    cv::Mat wf = psf.bpp;
+
+    cv::Mat_<cv::Vec2d> input = (cv::Mat_<cv::Vec2d>(5, 5) << 1, 0, 2, 0, 3,
+                                                              0, 0, 0, 0, 0,
+                                                              4, 0, 5, 0, 6,
+                                                              0, 0, 0, 0, 0,
+                                                              7, 0, 8, 0, 9);
+
+    // Create an output matrix for the Fourier coefficients
+    cv::Mat_<cv::Vec2d> output;
+
+    // Compute the forward DFT
+    cv::dft(input, output, cv::DFT_COMPLEX_OUTPUT);
+
+    // Compute the inverse DFT
+    cv::Mat_<cv::Vec2d> inverse;
+    cv::dft(output, inverse, cv::DFT_INVERSE | cv::DFT_REAL_OUTPUT);
+
+    // Print the input and output matrices
+    std::cout << "Input:\n" << input << std::endl;
+    std::cout << "Output:\n" << output << std::endl;
+    std::cout << "Inverse:\n" << inverse << std::endl;
+
+    // cv::Mat fft_output;
+    // cv::dft(wf, fft_output, cv::DFT_COMPLEX_OUTPUT);
+
+    // cv::Mat fft_output_abs = cv::abs(fft_output);
+
+    // cv::Mat fft_output_abs_squared;
+    // cv::pow(fft_output_abs, 2, fft_output_abs_squared);
+
+    // cout << fft_output_abs_squared(cv::Range(0,5),cv::Range(0,5)) << endl;
+
+
+    // cout << fft_output_abs_squared << endl;
+    // cv::imshow("window",abs_fft_output_squared);
+    // cv::waitKey(0);
+    abort();
+
+
+
+    // int dd = player();
+    // cout << vect[0] << endl;
     
     abort();
 
     cv::Mat aaa;
     return aaa;
 }
+
+
+
 
 
 vector<vector<cv::Mat>> RECON_2D::subback(vector<cv::Mat> img_stack){

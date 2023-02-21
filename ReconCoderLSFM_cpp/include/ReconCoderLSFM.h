@@ -90,8 +90,10 @@ public:
 	int zarr_num;
 	cv::Mat bpp;
 
+	// function
 	PSF();
 	void setParams(psf_params new_params);
+	cv::Mat getFlatWF();
 
 };
 

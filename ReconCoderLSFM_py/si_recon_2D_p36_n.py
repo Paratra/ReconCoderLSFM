@@ -62,8 +62,9 @@ class si2D(object):
         psf.getFlatWF()
         wf = psf.bpp
         psf1 = np.abs((fft2(wf)))**2
+
         psf1 = psf1/psf1.sum()
-        st()
+
         return psf1
 
     def meshgrid(self):

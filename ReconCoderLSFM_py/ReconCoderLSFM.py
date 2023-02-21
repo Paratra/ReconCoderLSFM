@@ -19,14 +19,14 @@ numangle = 3
 numphase = 3
 wl = 0.525
 na = 0.8
-size = 1024
+size = 512
 pixel_size = 0.135
-angle1 = (-179.49+90) /360*2*np.pi #0.459#
-angle2 = (62.057+90) /360*2*np.pi # -2.80#
-angle3 = (-64.176+90) /360*2*np.pi #2.871#
-patternspacing1 = 1/(198.397*(1/(size*pixel_size)))#1.54
-patternspacing2 = 1/(191.517*(1/(size*pixel_size)))
-patternspacing3 = 1/(202.401*(1/(size*pixel_size)))
+angle1 = (-179.432+90) /360*2*np.pi #0.459
+angle2 = (-116.338+90) /360*2*np.pi # -2.80
+angle3 = (116.275+90) /360*2*np.pi #2.871
+patternspacing1 = 1/(97.571*(1/(size*pixel_size))) #1.54
+patternspacing2 = 1/(96.644*(1/(size*pixel_size)))
+patternspacing3 = 1/(97.26*(1/(size*pixel_size)))
 
 # st()     
 
@@ -229,7 +229,7 @@ def main():
 
     # fns = r'H:/Onedrive for work/OneDrive - University of Georgia/Yang thesis/ReconSIMcode_04062022/2dsimrecon/beads_yg488_6um_300nmstep00_small_cut.tif'
     # fns = '../../data/20230118/beads_yg488_13um_500nmstep_20px_sin_512512_10.tif'
-    # fns = '../../data/20230119/organoid_d7_cae_yg488_10um_500nmstep_9px_sin_20482048_40.tif'
+    # fns = '../../data/20230211/beads_yg488_10um_500nmstep_9px_sin_512512.tif'
     fns = '../../../mingws/sim_recon/sim_si2d_1.tif'
     filename = fns.split('/')[-1]
     path = fns.replace(fns.split('/')[-1],'')
@@ -287,10 +287,11 @@ def main():
         print(x3)
 
 
-    elif MODE == "RECONSTRUCT":
-        x1 = (-1.5243951476097255, 0.6867847296078067, 0.014507401110210953)
-        x2 = (2.7038953007050175, 0.6918158179169475, 0.038245122366943135)
-        x3 = (0.47571382603501566, 0.683000578060385, 0.014348449718422569)
+    # elif MODE == "RECONSTRUCT":
+    #     x1 = (-1.5243951476097255, 0.6867847296078067, 0.014507401110210953)
+    #     x2 = (2.7038953007050175, 0.6918158179169475, 0.038245122366943135)
+    #     x3 = (0.47571382603501566, 0.683000578060385, 0.014348449718422569)
+
         # x1 = [0.459, 0.453, 0.374]
         # x2 = [-2.80, 0.466, 0.721]
         # x3 = [2.87, 0.461, 0.451]
@@ -306,14 +307,14 @@ def main():
         # # wf_test = driftcorrectafterrecon(wf,-0.5)
 
 
-        # print('Reconstruct for SIM')
-        # sim_save_path = os.path.join(path,'final_simimg_'+filename)
-        # # st()
-        # simimg = getSRSIM(img,numphase,x1,x2,x3)
+        print('Reconstruct for SIM')
+        sim_save_path = os.path.join(path,'final_simimg_'+filename)
+        # st()
+        simimg = getSRSIM(img,numphase,x1,x2,x3)
         
-        # # st()
-        # tf.imsave(sim_save_path,abs(simimg).astype(np.float32),photometric='minisblack')
-        # # tf.imsave('effective_OTF.tif',np.abs(np.fft.fftshift(p.Snum/p.Sden)).astype(np.float32),photometric='minisblack')
+        # st()
+        tf.imsave(sim_save_path,abs(simimg).astype(np.float32),photometric='minisblack')
+        # tf.imsave('effective_OTF.tif',np.abs(np.fft.fftshift(p.Snum/p.Sden)).astype(np.float32),photometric='minisblack')
 
     
         # Code to be timed here

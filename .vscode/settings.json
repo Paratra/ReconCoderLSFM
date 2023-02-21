@@ -1,0 +1,6 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/ReconCoderLSFM_cpp",
+    "files.associations": {
+        "vector": "cpp"
+    }
+}

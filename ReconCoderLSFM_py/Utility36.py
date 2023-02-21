@@ -7,6 +7,8 @@ Created on Mon Apr 09 16:36:51 2012
 
 import numpy as np
 import Zernike36 as Z
+from pdb import set_trace as st
+import matplotlib.pyplot as plt 
 
 def discArray(shape=(128,128),radius=64,origin=None,dtype=np.float64):
     nx = shape[0]
@@ -15,9 +17,12 @@ def discArray(shape=(128,128),radius=64,origin=None,dtype=np.float64):
     oy = ny/2
     x = np.linspace(-ox,ox-1,nx)
     y = np.linspace(-oy,oy-1,ny)
+
     X,Y = np.meshgrid(x,y)
     rho = np.sqrt(X**2 + Y**2)
     disc = (rho<radius).astype(dtype)
+
+    # st()
     if not origin==None:
         s0 = origin[0]-int(nx/2)
         s1 = origin[1]-int(ny/2)

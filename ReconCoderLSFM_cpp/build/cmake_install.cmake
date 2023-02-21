@@ -1,4 +1,4 @@
-# Install script for directory: /Users/mingsong/OneDrive - University of Georgia/Data_For_Use/reconstruct_code/ReconCoderLSFM_cpp
+# Install script for directory: /Users/mingsong/OneDrive - University of Georgia/Data_For_Use/ReconCoderLSFM/ReconCoderLSFM_cpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/usr/bin/objdump")
+  set(CMAKE_OBJDUMP "/Library/Developer/CommandLineTools/usr/bin/objdump")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/mingsong/OneDrive - University of Georgia/Data_For_Use/reconstruct_code/ReconCoderLSFM_cpp/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/mingsong/OneDrive - University of Georgia/Data_For_Use/ReconCoderLSFM/ReconCoderLSFM_cpp/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

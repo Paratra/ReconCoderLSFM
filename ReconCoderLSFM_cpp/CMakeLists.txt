@@ -19,6 +19,10 @@ find_package(TIFF REQUIRED)
 #message( ${TIFF_VERSION} )
 
 
+# add_library(ReconCoderLSFM src/ReconCoderLSFM.cpp)
+add_library(Utility src/Utility.cpp)
+# add_library(tools tools.cpp)
+
 ######## include directories
 include_directories(
   include
@@ -27,18 +31,23 @@ include_directories(
 
 add_executable( ReconCoderLSFM
   src/ReconCoderLSFM.cpp
+  src/Utility.cpp
   include/ReconCoderLSFM.h
+  include/Utility.h
 )
 
 target_link_libraries(
-    ReconCoderLSFM ${TIFF_LIBRARIES} ${OpenCV_LIBS}
+    ReconCoderLSFM ${TIFF_LIBRARIES} ${OpenCV_LIBS} Utility
 )
 
+
+
+target_link_libraries(
+  Utility ${OpenCV_LIBS}
+)
 
 # add_executable( Utility
 #   src/Utility.cpp
 #   include/Utility.h
 # )
-# target_link_libraries(
-#   Utility ${OpenCV_LIBS}
-# )
+

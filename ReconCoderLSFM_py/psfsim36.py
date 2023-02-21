@@ -46,6 +46,8 @@ class psf(object):
 
     def getFlatWF(self):
         self.bpp = U.discArray((self.nx,self.nx),self.radius)
+        # from pdb import set_trace as st
+        # st()
     
     def getZArrWF(self,zarr):
         self.zarr = zarr
