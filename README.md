@@ -5,13 +5,13 @@ Before using changing parameters for reconstruction in ReconCoderLSFM.py/ReconCo
 
 Python:
 
-  python3 ReconCoderLSFM.py
+  python3 ReconCoderLSFM.py \
   
 Cpp:
 
   cd ./ReconCoderLSFM_cpp \
-  rm -rf build
-  mkdir build
-  cmake ../
-  make
-  ./ReconCoderLSFM
+  rm -rf build \
+  mkdir build \
+  cmake ../ \
+  make \
+  ./ReconCoderLSFM \
