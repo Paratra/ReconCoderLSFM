@@ -9,7 +9,7 @@ Python:
   
 Cpp:
 
-  cd ./ReconCoderLSFM_cpp 
+  cd ./ReconCoderLSFM_cpp \n
   rm -rf build
   mkdir build
   cmake ../
